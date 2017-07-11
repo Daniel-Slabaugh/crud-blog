@@ -5,7 +5,7 @@ const app = express();
 
 app.use(morgan('common'));
 
-const blogRouter = require('./blogRouter');
+const blogRouter = require('./blogRouter.js');
 
 app.use('/blog-posts', blogRouter);
 
