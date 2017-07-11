@@ -1,0 +1,23 @@
+{
+  "name": "crud-blog",
+  "version": "1.0.0",
+  "description": "blog api",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daniel-Slabaugh/crud-blog.git"
+  },
+  "author": "Daniel Slabaugh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Daniel-Slabaugh/crud-blog/issues"
+  },
+  "homepage": "https://github.com/Daniel-Slabaugh/crud-blog#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}
