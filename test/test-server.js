@@ -58,7 +58,6 @@ describe('Blog Posts', function() {
   it('should update blog posts on put', function() {
 
     return chai.request(app)
-      // first have to get
       .get('/blog-posts')
       .then(function( res) {
         const updatedPost = Object.assign(res.body[0], {
@@ -74,6 +73,16 @@ describe('Blog Posts', function() {
       });
   });
 
-
+  it('should delete posts on DELETE', function() {
+    return chai.request(app)
+      .get('/blog-posts')
+      .then(function(res) {
+        return chai.request(app)
+          .delete(`/blog-posts/${res.body[0].id}`)
+          .then(function(res) {
+            res.should.have.status(204);
+          });
+      });
+  });
 
 });
