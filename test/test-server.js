@@ -55,5 +55,25 @@ describe('Blog Posts', function() {
       });
   });
 
+  it('should update blog posts on put', function() {
+
+    return chai.request(app)
+      // first have to get
+      .get('/blog-posts')
+      .then(function( res) {
+        const updatedPost = Object.assign(res.body[0], {
+          title: 'blog post 2',
+          content: 'we redid it!'
+        });
+      return chai.request(app)
+        .put(`/blog-posts/${res.body[0].id}`)
+        .send(updatedPost)
+        .then(function(res) {
+          res.should.have.status(204);
+        });
+      });
+  });
+
+
 
 });
