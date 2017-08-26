@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
 router.post('/', jsonParser, (req, res) => {
   //check to make sure we have info
-  const fields = ['title', 'content', 'author', 'publishDate'];
+  const fields = ['title', 'content', 'author'];
   for (let i=0; i<fields.length; i++) {
     const field = fields[i];
     if (!(field in req.body)) {
