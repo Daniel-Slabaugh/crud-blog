@@ -33,4 +33,27 @@ describe('Blog Posts', function() {
         });
       });
   });
+
+  it('should add a blog post on post', function() {
+    const newPost = {
+      title: 'Blog post 1',
+      content: 'this is the first blog post',
+      author: 'Daniel Slabaugh'
+    };
+    const expectedKeys = ['id', 'publishDate'].concat(Object.keys(newPost));
+    return chai.request(app)
+      .post('/blog-posts')
+      .send(newPost)
+      .then(function(res) {
+        res.should.have.status(201);
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.all.keys(expectedKeys);
+        res.body.title.should.equal(newPost.title);
+        res.body.content.should.equal(newPost.content);
+        res.body.author.should.equal(newPost.author)
+      });
+  });
+
+
 });
