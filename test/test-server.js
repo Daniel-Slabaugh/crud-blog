@@ -40,7 +40,9 @@ describe('Blog Posts', function() {
       content: 'this is the first blog post',
       author: 'Daniel Slabaugh',
     };
+    
     const expectedKeys = ['id', 'publishDate'].concat(Object.keys(newPost));
+    
     return chai.request(app)
       .post('/blog-posts')
       .send(newPost)
