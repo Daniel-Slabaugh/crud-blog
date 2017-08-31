@@ -1,34 +1,30 @@
 const mongoose = require('mongoose');
 
-//schema for blog post
-const blogSchema = mongoose.Schema({
-
-  title: {type: String, required: true},
-  content: String, 
+const blogPostSchema = mongoose.Schema({
   author: {
-    firstName: String, 
+    firstName: String,
     lastName: String
-  }
+  },
+  title: {type: String, required: true},
+  content: {type: String},
+  created: {type: Date, default: Date.now}
 });
 
-blogSchema.virtual('authorString').get(function() {
-  return `${this.author.firstName} ${this.author.lastName}`.trim()});
 
-// this is an *instance method* which will be available on all instances
-// of the model. This method will be used to return an object that only
-// exposes *some* of the fields we want from the underlying data
-blogSchema.methods.blogSimple = function() {
+blogPostSchema.virtual('authorName').get(function() {
+  return `${this.author.firstName} ${this.author.lastName}`.trim();
+});
 
+blogPostSchema.methods.apiRepr = function() {
   return {
     id: this._id,
-    title: this.title,
+    author: this.authorName,
     content: this.content,
-    author: this.authorString
+    title: this.title,
+    created: this.created
   };
 }
 
-// note that all instance methods and virtual properties on our
-// schema must be defined *before* we make the call to `.model`.
-const Blog = mongoose.model('Blog', blogSchema);
+const BlogPost = mongoose.model('BlogPost', blogPostSchema);
 
-module.exports = {Blog};
+module.exports = {BlogPost};
